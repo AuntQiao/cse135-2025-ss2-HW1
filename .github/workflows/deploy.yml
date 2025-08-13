@@ -1,0 +1,58 @@
+name: "Deploy to cse135.online (root)"
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v4
+
+      - name: "Install rsync and ssh client"
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rsync openssh-client
+
+      - name: "Sanity check required secrets"
+        run: |
+          [ -n "${{ secrets.DEPLOY_KEY }}" ]  || { echo "Missing secret: DEPLOY_KEY"; exit 1; }
+          [ -n "${{ secrets.HOST }}" ]        || { echo "Missing secret: HOST"; exit 1; }
+          [ -n "${{ secrets.USER }}" ]        || { echo "Missing secret: USER"; exit 1; }
+          [ -n "${{ secrets.REMOTE_PATH }}" ] || { echo "Missing secret: REMOTE_PATH"; exit 1; }
+          echo "HOST=${{ secrets.HOST }}"
+          echo "USER=${{ secrets.USER }}"
+          echo "REMOTE_PATH=${{ secrets.REMOTE_PATH }}"
+
+      - name: "Setup SSH"
+        run: |
+          mkdir -p ~/.ssh
+          printf "%s" '${{ secrets.DEPLOY_KEY }}' > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          cat > ~/.ssh/config <<'EOF'
+          Host droplet
+            HostName ${{ secrets.HOST }}
+            User ${{ secrets.USER }}
+            IdentityFile ~/.ssh/id_ed25519
+            StrictHostKeyChecking no
+          EOF
+
+      - name: "Probe SSH"
+        run: ssh -o BatchMode=yes droplet "echo connected && whoami && test -d '${{ secrets.REMOTE_PATH }}' && echo target-ok"
+
+
+      - name: "Rsync to docroot (no delete)"
+        run: |
+          rsync -az \
+            --exclude ".git" \
+            --exclude ".github" \
+            ./ \
+            droplet:'${{ secrets.REMOTE_PATH }}'
+
+      - name: "Reload Apache"
+        run: ssh droplet "sudo systemctl reload apache2 || true"

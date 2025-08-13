@@ -45,7 +45,6 @@ jobs:
       - name: "Probe SSH"
         run: ssh -o BatchMode=yes droplet "echo connected && whoami && test -d '${{ secrets.REMOTE_PATH }}' && echo target-ok"
 
-
       - name: "Rsync to docroot (no delete)"
         run: |
           rsync -az \

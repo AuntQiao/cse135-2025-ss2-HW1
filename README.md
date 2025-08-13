@@ -1,5 +1,10 @@
 # cse135-2025-ss2-HW1
 
+## Part 2 ： Deploy from Github
+1) create a new pair of ssh key
+2) add the new public key to Droplet and the private key to Github Secrets
+   
+
 ## Step 4: Employ password protection
 
 Login information: 

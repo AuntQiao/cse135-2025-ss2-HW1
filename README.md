@@ -50,8 +50,8 @@ Make it executable:
 
 2.3 Add and commit
 
-git add .
-git commit -m "deploy: first push from local to droplet"
+`git add .`
+`git commit -m "deploy frist push from local to droplet"`
 
 2.4 branch to main
 

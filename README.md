@@ -8,9 +8,9 @@ Deploying from GitHub (Local) to DigitalOcean Server
 
 1. Server Setup
    
-1.1 Create a bare repository
+1.1 Create a --bare repository
 
-On the server, create a bare repo at /var/repo/site.git to receive pushes from your local machine:
+On the server, create a bare repo at `/var/repo/site.git` to receive pushes from your local machine:
 
 `sudo mkdir -p /var/repo`
 
@@ -30,7 +30,48 @@ Edit `/var/repo/site.git/hooks/post-receive` and add:
 
 `git --work-tree=/var/www/cse135.online --git-dir=/var/repo/site.git checkout -f`
 
+Make it executable:
 
+`chmod +x /var/repo/site.git/hooks/post-receive`
+
+1.3 Ensure the web root exists and is writable
+
+`sudo mkdir -p /var/www/cse135.online`
+
+`sudo chown -R yanhua:yanhua /var/www/cse135.online`
+
+2. Local Machine Setup (Windows + Git Bash)
+
+2.1 Go to local site source folder
+
+`cd ~/OneDrive/Desktop/COG108/cse135-2025-ss2-HW1`
+
+2.2 Initialize Git
+
+`git init`
+
+2.3 Add and commit
+
+git add .
+git commit -m "deploy: first push from local to droplet"
+
+2.4 branch to main
+
+`git branch -M main`
+
+2.5 Add the server as a remote
+
+`git remote remove prod 2>/dev/null`
+
+`git remote add prod ssh://yanhua@cse135.online/var/repo/site.git`
+
+2.6 push to server
+
+`git push -u prod main`
+
+The server’s post-receive hook automatically checks out the latest code "into /var/www/cse135.online/" so the site updates instantly.
+
+   
 ## Step 4: Employ password protection
 
 Login information: 

@@ -52,7 +52,7 @@ Make it executable:
 
 `git add .`
 
-`git commit -m "deploy frist push from local to droplet"`
+`git commit -m "test-test-test deployment"`
 
 2.4 branch to main
 

@@ -7,12 +7,18 @@
 Deploying from GitHub (Local) to DigitalOcean Server
 
 1. Server Setup
+   
 1.1 Create a bare repository
+
 On the server, create a bare repo at /var/repo/site.git to receive pushes from your local machine:
+
 `sudo mkdir -p /var/repo`
-'sudo chown -R yanhua:yanhua /var/repo'
-'cd /var/repo'
-'git init --bare site.git'
+
+`sudo chown -R yanhua:yanhua /var/repo`
+
+`cd /var/repo`
+
+`git init --bare site.git`
 
 
 ## Step 4: Employ password protection

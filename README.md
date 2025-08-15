@@ -20,6 +20,16 @@ On the server, create a bare repo at /var/repo/site.git to receive pushes from y
 
 `git init --bare site.git`
 
+1.2 Create the post-receive hook
+
+Edit `/var/repo/site.git/hooks/post-receive` and add:
+
+`#!/bin/sh`
+
+`set -e`
+
+`git --work-tree=/var/www/cse135.online --git-dir=/var/repo/site.git checkout -f`
+
 
 ## Step 4: Employ password protection
 

@@ -102,3 +102,81 @@ After enable the compression, the HTML file sent from the server became much sma
 
 Hiding server- information or server version can help prevent attackers from accessing your server. This improves security, as clear version information gives hackers a better understanding of where to begin looking for vulnerabilities. I spent a long time working on this part, and we didn't successfully to create a 'server: CSE135 Server'.But I removed the specific Apache version information to minimize risk within my capabilities.
 
+#Create a directory for hw1 report
+ls -l /var/www/cse135.online/
+sudo mkdir -p /var/www/cse135.online/hw1
+
+## Step 8: Verify Access Logs and Run a Report
+
+## Give permission to users
+
+'sudo chown -R yanhua:8888 /var/www/cse135.online/hw1'
+
+'goaccess /var/log/apache2/access.log \
+  --log-format=COMBINED \
+  -o /var/www/cse135.online/hw1/report.html'
+
+'sudo chown -R nicole:8888 /var/www/cse135.online/hw1'
+
+'goaccess /var/log/apache2/access.log \
+  --log-format=COMBINED \
+  -o /var/www/cse135.online/hw1/report.html'
+
+'sudo chown -R grader:8888 /var/www/cse135.online/hw1'
+
+'sudo chmod 755 /var/www/cse135.online/hw1'
+
+'ls -ld /var/www/cse135.online /var/www/cse135.online/hw1'
+
+'goaccess /var/log/apache2/access.log \
+  --log-format=COMBINED \
+  -o /var/www/cse135.online/hw1/report.html'
+
+Check
+'ls -lh /var/www/cse135.online/hw1/'
+
+Give permission to access adm
+
+'sudo usermod -aG adm yanhua'
+
+'sudo usermod -aG adm nicole'
+
+'sudo usermod -aG adm grader'
+
+'exit'
+
+relogin ssh: 'groups'
+
+GoAccess(generates the report)
+'goaccess /var/log/apache2/access.log \
+  --log-format=COMBINED \
+  -o /var/www/cse135.online/hw1/report.html'
+
+Check
+
+'sudo chmod 644 /var/www/cse135.online/hw1/report.html'
+
+'ls -lh /var/www/cse135.online/hw1/report.html'
+
+'curl -I https://cse135.online/hw1/report.html'
+
+
+We found HTTP/1.1 500 Internal Server Error
+
+Check the log
+
+'sudo grep -n "report.html" /var/log/apache2/error.log | tail -n 20'
+
+'sudo tail -n 80 /var/log/apache2/error.log'
+
+We found the error is :ModSecurity: Output filter: Content-Length (970165) over the limit (524288).
+
+'sudo nano /etc/modsecurity/modsecurity.conf'
+
+We change this part: “limited” to “ProcessPartial”
+'SecResponseBodyLimitAction ProcessPartial'
+
+'sudo apache2ctl configtest'
+'sudo systemctl reload apache2'
+
+Reload the page, done!

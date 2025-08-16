@@ -167,11 +167,11 @@ Check the log
 
 `sudo grep -n "report.html" /var/log/apache2/error.log | tail -n 20`
 
-'sudo tail -n 80 /var/log/apache2/error.log`
+`sudo tail -n 80 /var/log/apache2/error.log`
 
 We found the error is :ModSecurity: Output filter: Content-Length (970165) over the limit (524288).
 
-'sudo nano /etc/modsecurity/modsecurity.conf`
+`sudo nano /etc/modsecurity/modsecurity.conf`
 
 We change this part: “limited” to “ProcessPartial”
 `SecResponseBodyLimitAction ProcessPartial`

@@ -110,73 +110,73 @@ sudo mkdir -p /var/www/cse135.online/hw1
 
 ## Give permission to users
 
-'sudo chown -R yanhua:8888 /var/www/cse135.online/hw1'
+`sudo chown -R yanhua:8888 /var/www/cse135.online/hw1`
 
-'goaccess /var/log/apache2/access.log \
+`goaccess /var/log/apache2/access.log \
   --log-format=COMBINED \
-  -o /var/www/cse135.online/hw1/report.html'
+  -o /var/www/cse135.online/hw1/report.html`
 
-'sudo chown -R nicole:8888 /var/www/cse135.online/hw1'
+`sudo chown -R nicole:8888 /var/www/cse135.online/hw1`
 
-'goaccess /var/log/apache2/access.log \
+`goaccess /var/log/apache2/access.log \
   --log-format=COMBINED \
-  -o /var/www/cse135.online/hw1/report.html'
+  -o /var/www/cse135.online/hw1/report.html`
 
-'sudo chown -R grader:8888 /var/www/cse135.online/hw1'
+`sudo chown -R grader:8888 /var/www/cse135.online/hw1`
 
-'sudo chmod 755 /var/www/cse135.online/hw1'
+`sudo chmod 755 /var/www/cse135.online/hw1`
 
-'ls -ld /var/www/cse135.online /var/www/cse135.online/hw1'
+`ls -ld /var/www/cse135.online /var/www/cse135.online/hw1`
 
-'goaccess /var/log/apache2/access.log \
+`goaccess /var/log/apache2/access.log \
   --log-format=COMBINED \
-  -o /var/www/cse135.online/hw1/report.html'
+  -o /var/www/cse135.online/hw1/report.html`
 
 Check
-'ls -lh /var/www/cse135.online/hw1/'
+`ls -lh /var/www/cse135.online/hw1/`
 
 Give permission to access adm
 
-'sudo usermod -aG adm yanhua'
+`sudo usermod -aG adm yanhua`
 
-'sudo usermod -aG adm nicole'
+`sudo usermod -aG adm nicole`
 
-'sudo usermod -aG adm grader'
+`sudo usermod -aG adm grader`
 
-'exit'
+`exit`
 
-relogin ssh: 'groups'
+relogin ssh: `groups`
 
 GoAccess(generates the report)
-'goaccess /var/log/apache2/access.log \
+`goaccess /var/log/apache2/access.log \
   --log-format=COMBINED \
-  -o /var/www/cse135.online/hw1/report.html'
+  -o /var/www/cse135.online/hw1/report.html`
 
 Check
 
-'sudo chmod 644 /var/www/cse135.online/hw1/report.html'
+`sudo chmod 644 /var/www/cse135.online/hw1/report.html`
 
-'ls -lh /var/www/cse135.online/hw1/report.html'
+`ls -lh /var/www/cse135.online/hw1/report.html`
 
-'curl -I https://cse135.online/hw1/report.html'
+`curl -I https://cse135.online/hw1/report.html`
 
 
 We found HTTP/1.1 500 Internal Server Error
 
 Check the log
 
-'sudo grep -n "report.html" /var/log/apache2/error.log | tail -n 20'
+`sudo grep -n "report.html" /var/log/apache2/error.log | tail -n 20`
 
-'sudo tail -n 80 /var/log/apache2/error.log'
+'sudo tail -n 80 /var/log/apache2/error.log`
 
 We found the error is :ModSecurity: Output filter: Content-Length (970165) over the limit (524288).
 
-'sudo nano /etc/modsecurity/modsecurity.conf'
+'sudo nano /etc/modsecurity/modsecurity.conf`
 
 We change this part: “limited” to “ProcessPartial”
-'SecResponseBodyLimitAction ProcessPartial'
+`SecResponseBodyLimitAction ProcessPartial`
 
-'sudo apache2ctl configtest'
-'sudo systemctl reload apache2'
+`sudo apache2ctl configtest`
+`sudo systemctl reload apache2`
 
 Reload the page, done!

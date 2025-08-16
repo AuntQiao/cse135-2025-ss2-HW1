@@ -108,6 +108,8 @@ sudo mkdir -p /var/www/cse135.online/hw1
 
 ## Step 8: Verify Access Logs and Run a Report
 
+https://cse135.online/hw1/report.html
+
 ## Give permission to users
 
 `sudo chown -R yanhua:8888 /var/www/cse135.online/hw1`

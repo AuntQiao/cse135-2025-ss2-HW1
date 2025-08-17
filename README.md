@@ -182,3 +182,19 @@ We change this part: “limited” to “ProcessPartial”
 `sudo systemctl reload apache2`
 
 Reload the page, done!
+
+## Step 8: Extra Credit
+
+Install and set up the matomo
+
+write JS and connect to our home page `sudo nano /var/www/cse135.online/index.html`
+
+extent the memory_limit and max_execution_time `sudo nano /etc/php/8.4/apache2/php.ini`
+
+change: `memory_limit = 512M` and `max_execution_time = 90` save it
+
+`sudo systemctl restart apache2`
+
+since it's a new website just created, will show a red warning sign, just refresh the site to get in:
+
+https://cse135.online/matomo/index.php?module=CoreHome&action=index&idSite=1&period=day&date=yesterday#?period=day&date=yesterday&category=Dashboard_Dashboard&subcategory=1

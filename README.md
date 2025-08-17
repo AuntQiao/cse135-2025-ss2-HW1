@@ -1,6 +1,7 @@
 # cse135-2025-ss2-HW1
 
-## Part 2 ： Deploy from Github
+## Part 2 ： 
+## Details of Github auto deploy setup
 
 Deploying from GitHub (Local) to DigitalOcean Server
 
@@ -71,6 +72,7 @@ Make it executable:
 The server’s post-receive hook automatically checks out the latest code "into /var/www/cse135.online/" so the site updates instantly.
 
    
+## Username/password info for logging into the site
 ## Step 4: Employ password protection
 
 https://cse135.online/members/
@@ -88,6 +90,7 @@ password:8888
 
 ex: sudo chown -R grader:8888 /var/www/cse135.online/hw1
 
+## Summary of changes to HTML file in DevTools after compression
 ## Step 5: Compression Verification
 
 Enabled mod_deflate in Apache to compress HTML, CSS, and JS
@@ -100,12 +103,12 @@ HTML reduced in transfer size, confirming that compression is active.
 
 After enable the compression, the HTML file sent from the server became much smaller in size when transferred, but the actual page content stayed the same. The browser still showed the full HTML after it was uncompressed. This made the page load faster and used less data.
 
-
+## Summary of removing 'server' header
 ## Step 6: Obscure server identity
 
 Hiding server- information or server version can help prevent attackers from accessing your server. This improves security, as clear version information gives hackers a better understanding of where to begin looking for vulnerabilities. I spent a long time working on this part, and we didn't successfully to create a 'server: CSE135 Server'.But I removed the specific Apache version information to minimize risk within my capabilities.
 
-
+## Extra credit: Analytics configuration
 ## Step 8: Verify Access Logs and Run a Report
 
 https://cse135.online/hw1/report.html

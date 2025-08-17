@@ -73,6 +73,8 @@ The server’s post-receive hook automatically checks out the latest code "into 
    
 ## Step 4: Employ password protection
 
+https://cse135.online/members/
+
 Login information: 
 
 username:grader

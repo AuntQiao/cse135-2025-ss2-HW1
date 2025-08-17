@@ -3,7 +3,7 @@
 ## Part 2 ： 
 ## Details of Github auto deploy setup
 
-Deploying from GitHub (Local) to DigitalOcean Server
+Deploying from GitHub (Local) to DigitalOcean Server 
 
 1. Server Setup
    

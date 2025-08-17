@@ -105,9 +105,6 @@ After enable the compression, the HTML file sent from the server became much sma
 
 Hiding server- information or server version can help prevent attackers from accessing your server. This improves security, as clear version information gives hackers a better understanding of where to begin looking for vulnerabilities. I spent a long time working on this part, and we didn't successfully to create a 'server: CSE135 Server'.But I removed the specific Apache version information to minimize risk within my capabilities.
 
-#Create a directory for hw1 report
-ls -l /var/www/cse135.online/
-sudo mkdir -p /var/www/cse135.online/hw1
 
 ## Step 8: Verify Access Logs and Run a Report
 

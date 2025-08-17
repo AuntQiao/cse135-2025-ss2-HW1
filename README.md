@@ -84,6 +84,7 @@ password:8888
 username:yanhua
 password:8888
 
+ex: sudo chown -R grader:8888 /var/www/cse135.online/hw1
 
 ## Step 5: Compression Verification
 

@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Nicole's Area"
+AuthUserFile /var/www/cse135.online/public_html/members/.htpasswd
+Require valid-user

@@ -1,48 +1,22 @@
-name: "Deploy to cse135.online (root)"
+name: Deploy to Apache Server
 
 on:
   push:
     branches:
       - main
-      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: "Checkout"
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: "Install rsync and ssh client"
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y rsync openssh-client
+      - name: Install SSH key
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: "Setup SSH"
+      - name: Deploy to server
         run: |
-          mkdir -p ~/.ssh
-          printf "%s" '${{ secrets.DEPLOY_KEY }}' > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          {
-            echo "Host droplet"
-            echo "  HostName ${{ secrets.HOST }}"
-            echo "  User ${{ secrets.USER }}"
-            echo "  IdentityFile ~/.ssh/id_ed25519"
-            echo "  StrictHostKeyChecking no"
-          } >> ~/.ssh/config
-
-      - name: "Probe SSH"
-        run: |
-          ssh -o BatchMode=yes droplet "echo connected && whoami && test -d '${{ secrets.REMOTE_PATH }}' && echo target-ok"
-
-      - name: "Rsync to /var/www/cse135.online (no delete)"
-        run: |
-          rsync -az \
-            --exclude ".git" \
-            --exclude ".github" \
-            ./ \
-            droplet:'${{ secrets.REMOTE_PATH }}'
-
-      - name: "Reload Apache"
-        run: ssh droplet "sudo systemctl reload apache2 || true"
-        
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /var/www/cse135.online/public_html && git pull origin main"

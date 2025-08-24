@@ -3,7 +3,7 @@ name: Deploy to Apache Server
 on:
   push:
     branches:
-      - main   
+      - main   # push to main
 
 jobs:
   deploy:
@@ -13,16 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. install SSH private key
+      # 2. install SSH privatekey（use DEPLOY_KEY）
       - name: Install SSH key
         uses: webfactory/ssh-agent@v0.8.0
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
-      # 3. deploy
+      # 3. deploy to server
       - name: Deploy to server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "\
+          ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.HOST }} "\
             cd /var/www/cse135.online/public_html && \
             git pull origin main \
           "

@@ -21,6 +21,4 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd /var/www/cse135.online/public_html && git pull origin main"
 
-      - name: Test SSH connection
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "whoami && hostname && pwd"
+   

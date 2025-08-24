@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="/favicon.png" type="image/png">
@@ -57,23 +58,161 @@
     }
     header, footer { grid-column: 1 / -1; }
    </style>
+
+   <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P85LS00B0J"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-P85LS00B0J');
+  </script>   
+
+  <!-- LogRocket -->
+  <script src="https://cdn.lr-ingest.io/LogRocket.min.js" crossorigin="anonymous"></script>
+  <script>
+    window.LogRocket && window.LogRocket.init('yas033mel057/cse135');
+    
+    LogRocket.identify('yas033', {
+      name: 'yas033', 
+      email: 'yas033@ucsd.com',
+      course: 'CSE135'
+    });
+  </script>
 </head>
 
 <body>
   <header>
     <h1>CSE 135</h1>
-    <h2>Summer 2025</h2>
+    <h2>~~Summer 2025~~</h2>
   </header>
+  
+  <!-- Consent Banner -->
+  <div id="consent-banner">
+    <p>We use cookies for analytics. Do you consent to Google Analytics tracking?</p>
+    <button onclick="acceptConsent()">Accept</button>
+    <button onclick="rejectConsent()">Reject</button>
+  </div>
 
-  <main>
+  <script>
+    function acceptConsent() {
+      localStorage.setItem("ga_consent", "granted");
+      gtag('consent', 'update', {'analytics_storage': 'granted'});
+      document.getElementById("consent-banner").style.display = "none";
+    }
+    function rejectConsent() {
+      localStorage.setItem("ga_consent", "denied");
+      gtag('consent', 'update', {'analytics_storage': 'denied'});
+      document.getElementById("consent-banner").style.display = "none";
+    }
+
+    window.addEventListener("load", function() {
+      const consent = localStorage.getItem("ga_consent");
+      if (consent) {
+        document.getElementById("consent-banner").style.display = "none";
+        gtag('consent', 'update', {'analytics_storage': consent});
+      }
+    });
+  </script>
+
+  
+ <main>
     <h2 class="section-title">Homework 1</h2>
     <ul class="gray">
-      <li><a href="https://cse134bweek5.netlify.app/designed404page">PHP</a></li>
+      <li><a href="/hello.php">PHP</a></li>
+      <li><a href="/404.html">customed 404 page</a></li>
       <li><a href="https://cse134bweek5.netlify.app/designed404page">Node</a></li>
-      <li><a href="https://cse134bweek5.netlify.app/designed404page">Analytics</a></li>
+      <li><a href="/report.html">Analytics (Report)</a></li>
     </ul>
+
     <h2 class="section-title">Homework 2</h2>
-    <p class="gray">TBD</p>
+    <ul class="gray">
+      <!-- Perl -->
+      <li>Perl
+        <ul>
+          <li><a href="/cgi-bin/perl-hello-html-world.pl">Hello</a> (<a href="/src/perl-hello-html-world.pl">source</a>)</li>
+          <li><a href="/cgi-bin/perl-hello-json-world.pl">Hello (JSON)</a> (<a href="/src/perl-hello-json-world.pl">source</a>)</li>
+          <li><a href="/cgi-bin/perl-env.pl">Environment</a> (<a href="/src/perl-env.pl">source</a>)</li>
+          <li><a href="/cgi-bin/perl-get-echo.pl">GET Echo</a> (<a href="/src/perl-get-echo.pl">source</a>)</li>
+          <li><a href="/cgi-bin/perl-post-echo.pl">POST Echo</a> (<a href="/src/perl-post-echo.pl">source</a>)</li>
+          <li><a href="/cgi-bin/perl-general-echo.pl">General Echo</a> (<a href="/src/perl-general-echo.pl">source</a>)</li>
+          <li><a href="/perl-cgiform.html">Sessioning</a>
+            (<a href="/src/perl-session1.pl">page 1</a>)
+            (<a href="/src/perl-session2.pl">page 2</a>)
+            (<a href="/src/perl-destroy-session.pl">destroy</a>)
+          </li>
+        </ul>
+      </li>
+
+      <!-- C -->
+      <li>C
+        <ul>
+          <li><a href="/cgi-bin/c-hello-html-world.cgi">Hello</a> (<a href="/src/c-hello-html-world.c">source</a>)</li>
+          <li><a href="/cgi-bin/c-hello-json-world.cgi">Hello (JSON)</a> (<a href="/src/c-hello-json-world.c">source</a>)</li>
+          <li><a href="/cgi-bin/c-environment.cgi">Environment</a> (<a href="/src/c-environment.c">source</a>)</li>
+          <li><a href="/cgi-bin/c-get-echo.cgi">GET Echo</a> (<a href="/src/c-get-echo.c">source</a>)</li>
+          <li><a href="/cgi-bin/c-post-echo.cgi">POST Echo</a> (<a href="/src/c-post-echo.c">source</a>)</li>
+          <li><a href="/cgi-bin/c-general-request-echo.cgi">General Echo</a> (<a href="/src/c-general-request-echo.c">source</a>)</li>
+          <li><a href="/C-cgiform.html">Sessioning</a>
+            (<a href="/src/c-sessions-1.c">page 1</a>)
+            (<a href="/src/c-sessions-2.c">page 2</a>)
+            (<a href="/src/c-ds.c">destroy</a>)
+          </li>
+        </ul>
+      </li>
+
+      <!-- PHP -->
+      <li>PHP
+        <ul>
+          <li><a href="/cgi-bin/php-hello-html-world.php">Hello</a> (<a href="/src/php-hello-html-world.php">source</a>)</li>
+          <li><a href="/cgi-bin/php-hello-json-world.php">Hello (JSON)</a> (<a href="/src/php-hello-json-world.php">source</a>)</li>
+          <li><a href="/cgi-bin/php-env.php">Environment</a> (<a href="/src/php-env.php">source</a>)</li>
+          <li><a href="/cgi-bin/php-get-echo.php">GET Echo</a> (<a href="/src/php-get-echo.php">source</a>)</li>
+          <li><a href="/cgi-bin/php-post-echo.php">POST Echo</a> (<a href="/src/php-post-echo.php">source</a>)</li>
+          <li><a href="/cgi-bin/php-general-echo.php">General Echo</a> (<a href="/src/php-general-echo.php">source</a>)</li>
+          <li><a href="/php-cgiform.html">Sessioning</a>
+            (<a href="/src/php-ss1.php">page 1</a>)
+            (<a href="/src/php-ss2.php">page 2</a>)
+            (<a href="/src/php-ds.php">destroy</a>)
+          </li>
+        </ul>
+      </li>
+
+      <!-- Python -->
+      <li>Python
+        <ul>
+          <li><a href="/cgi-bin/py-hello-html-world.py">Hello</a> (<a href="/src/py-hello-html-world.py">source</a>)</li>
+          <li><a href="/cgi-bin/py-hello-json-world.py">Hello (JSON)</a> (<a href="/src/py-hello-json-world.py">source</a>)</li>
+          <li><a href="/cgi-bin/py-environment.py">Environment</a> (<a href="/src/py-environment.py">source</a>)</li>
+          <li><a href="/cgi-bin/py-get-echo.py">GET Echo</a> (<a href="/src/py-get-echo.py">source</a>)</li>
+          <li><a href="/cgi-bin/py-post-echo.py">POST Echo</a> (<a href="/src/py-post-echo.py">source</a>)</li>
+          <li><a href="/cgi-bin/py-general-request-echo.py">General Echo</a> (<a href="/src/py-general-request-echo.py">source</a>)</li>
+          <li><a href="/py-cgiform.html">Sessioning</a>
+            (<a href="/src/py-ss1.py">page 1</a>)
+            (<a href="/src/py-ss2.py">page 2</a>)
+            (<a href="/src/py-ds.py">destroy</a>)
+          </li>
+        </ul>
+      </li>
+
+      <!-- Ruby -->
+      <li>Ruby
+        <ul>
+          <li><a href="cgi-bin/rb-hello-html-world.rb">Hello</a> (<a href="/src/ruby-hello-html-world.rb">source</a>)</li>
+          <li><a href="cgi-bin/rb-hello-json-world.rb">Hello (JSON)</a> (<a href="/src/ruby-hello-json-world.rb">source</a>)</li>
+          <li><a href="cgi-bin/rb-environment.rb">Environment</a> (<a href="/src/ruby-environment.rb">source</a>)</li>
+          <li><a href="cgi-bin/rb-get-echo.rb">GET Echo</a> (<a href="/src/ruby-get-echo.rb">source</a>)</li>
+          <li><a href="cgi-bin/rb-post-echo.rb">POST Echo</a> (<a href="/src/ruby-post-echo.rb">source</a>)</li>
+          <li><a href="cgi-bin/rb-general-request-echo.rb">General Echo</a> (<a href="/src/ruby-general-request-echo.rb">source</a>)</li>
+          <li><a href="rb-cgiform.html">Sessioning</a>
+            (<a href="src/rb-ss1.rb">page 1</a>)
+            (<a href="src/rb-ss2.rb">page 2</a>)
+            (<a href="src/rb-ds.rb">destroy</a>)
+          </li>
+        </ul>
+      </li>
+    </ul>
 
     <h2 class="section-title">Analytics App</h2>
     <p class="gray">TBD</p>
